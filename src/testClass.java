@@ -1,11 +1,14 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class testClass {
@@ -23,9 +26,9 @@ public class testClass {
     }
         @AfterClass
         public void quit(){
-            driver.quit();
+            //driver.quit();
         }
-        
+
         @Test
         public void test() throws InterruptedException {
         driver.findElement(By.xpath("//div[text()='Log In']")).click();
@@ -38,5 +41,14 @@ public class testClass {
         driver.findElement(By.xpath("//span[text()='cagritaner']")).click();
 
         driver.findElement(By.xpath("//a[@href='/cagritaner/followers/']")).click();
+
+
+        List<WebElement> clickOnFollowButton = driver.findElements(By.xpath("//button[contains(text(),'Follow')]"));
+            for (int i = 0; i < clickOnFollowButton.size() ; i++) {
+                driver.findElements(By.xpath("//button[contains(text(),'Follow')]")).get(i).click();
+
+                ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", clickOnFollowButton);
+
+            }
     }
 }
