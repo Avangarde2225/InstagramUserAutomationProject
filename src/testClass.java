@@ -46,8 +46,15 @@ public class testClass {
         List<WebElement> clickOnFollowButton = driver.findElements(By.xpath("//button[contains(text(),'Follow')]"));
             for (int i = 0; i < clickOnFollowButton.size() ; i++) {
                 WebElement element = driver.findElements(By.xpath("//button[contains(text(),'Follow')]")).get(i);
+                driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
                 ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
                 element.click();
+
+                WebElement requested = driver.findElement(By.xpath("//button[contains(text(),'Requested')]"));
+                WebElement following = driver.findElement(By.xpath("//button[contains(text(),'Following')]"));
+                if(element.equals(requested) || element.equals(following)){
+                    continue;
+                }
 
             }
     }
