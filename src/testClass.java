@@ -23,6 +23,7 @@ public class testClass {
         driver.manage().window().maximize();
         driver.findElement(By.xpath("//input[@aria-label='Phone number, username, or email']")).sendKeys(username);
         driver.findElement(By.xpath("//input[@aria-label='Password']")).sendKeys(password);
+        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;
     }
         @AfterClass
         public void quit(){
@@ -30,11 +31,9 @@ public class testClass {
         }
 
         @Test
-        public void test() throws InterruptedException {
+        public void test(){
         driver.findElement(By.xpath("//div[text()='Log In']")).click();
-        Thread.sleep(2000);
         driver.findElement(By.xpath("//button[text()='Not Now']")).click();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElement(By.xpath("//button[text()='Not Now']")).click();
 
         driver.findElement(By.xpath("//input[@placeholder='Search']")).sendKeys("Cagri Taner");
@@ -53,7 +52,7 @@ public class testClass {
                 WebElement requested = driver.findElement(By.xpath("//button[contains(text(),'Requested')]"));
                 WebElement following = driver.findElement(By.xpath("//button[contains(text(),'Following')]"));
                 if(element.equals(requested) || element.equals(following)){
-                    continue;
+
                 }
 
             }
